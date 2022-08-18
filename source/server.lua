@@ -14,15 +14,25 @@ if Settings.Pay.Toggle then
         local player = source
         local target = tonumber(args[1])
         local amount = tonumber(args[2])
-        NDCore.Functions.TransferBank(amount, player, target)
+        if target and amount ~= nil then
+            NDCore.Functions.TransferBank(amount, player, target)
+        else
+           -- Wrong syntax, it's /pay <id> <amount>
+           TriggerClientEvent('chatMessage', source, '^1ERROR: Wrong usage. /pay <id> <amount>')
+        end
     end, false)
 end
 
 if Settings.Give.Toggle then
     RegisterCommand(Settings.Give.Command, function(source, args, rawCommand)
         local player = source
-        local amount = tonumber(args[2])
-        NDCore.Functions.GiveCashToNearbyPlayer(player, amount)
+        local amount = tonumber(args[1])
+        if amount ~= nil then
+            NDCore.Functions.GiveCashToNearbyPlayer(player, amount)
+        else
+           -- Wrong syntax, it's /give <amount>
+           TriggerClientEvent('chatMessage', source, '^1ERROR: Wrong usage. /give <amount>')
+        end
     end, false)
 end
 
