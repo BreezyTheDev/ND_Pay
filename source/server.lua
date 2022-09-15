@@ -42,7 +42,6 @@ if Settings.AddMoney.Toggle then
         local target = tonumber(args[1])
         local option = table.concat(args, " ", 2) -- cash or bank
         local amount = tonumber(args[3])
-            
         if IsPlayerAceAllowed(player, "AddMoney.access") then
             if target and amount ~= nil then
                 if option == "bank" then
