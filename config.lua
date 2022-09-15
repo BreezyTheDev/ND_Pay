@@ -14,4 +14,8 @@ Settings = {
         Toggle = true,
         Command = "give" -- /give <amount> -- Uses your cash balance to transfer funds to the nearest player.
     }
+    AddMoney = {
+        Toggle = true,
+        Command = "addmoney" -- /addmoney <id> <cash:bank> <amount> -- Adds money to cash or bank to the targeted player.
+    }
 }
