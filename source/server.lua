@@ -42,15 +42,20 @@ if Settings.AddMoney.Toggle then
         local target = tonumber(args[1])
         local option = table.concat(args, " ", 2) -- cash or bank
         local amount = tonumber(args[3])
-        if target and amount ~= nil then
-            if option == "bank" then
-                NDCore.Functions.AddMoney(amount, target, "bank")
-            elseif option == "cash" then
-                NDCore.Functions.AddMoney(amount, target, "cash")
+            
+        if IsPlayerAceAllowed(player, "AddMoney.access") then
+            if target and amount ~= nil then
+                if option == "bank" then
+                    NDCore.Functions.AddMoney(amount, target, "bank")
+                elseif option == "cash" then
+                    NDCore.Functions.AddMoney(amount, target, "cash")
+                end
+            else
+                -- Wrong syntax, it's /addmoney <id> <cash:bank> <amount>
+                TriggerClientEvent('chatMessage', src, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
             end
         else
-            -- Wrong syntax, it's /addmoney <id> <cash:bank> <amount>
-            TriggerClientEvent('chatMessage', player, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
+            TriggerClientEvent('chatMessage', player, '^1ERROR: You need permission for this command!')
         end
     end, false)
 end
