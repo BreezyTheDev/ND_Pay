@@ -10,6 +10,8 @@ This resource was made to give those the option to have pay commands for the [ND
 
 `/give <amount>` - Uses your cash balance to transfer funds to the nearest player.
 
+`/addmoney <id> <cash:bank> <amount>` - Adds money to cash or bank to the targeted player. Requires `AddMoney.access` Ace permission.
+
 ## Required Dependencies
 
 [ND_Framework](https://github.com/Andyyy7666/ND_Framework)
@@ -25,6 +27,11 @@ The following can be found in the ``config.lua`` file.
     Give = {
         Toggle = true,
         Command = "give" -- /give <amount> -- Uses your cash balance to transfer funds to the nearest player.
+    },
+    AddMoney = {
+        Toggle = true,
+        Ace = "AddMoney.access", -- Ace Permission
+        Command = "addmoney" -- /addmoney <id> <cash:bank> <amount> -- Adds money to cash or bank to the targeted player.
     }
 ```
 You can toggle the commands on or off & change the commands to your preference.
