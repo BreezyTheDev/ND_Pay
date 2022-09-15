@@ -16,6 +16,7 @@ Settings = {
     }
     AddMoney = {
         Toggle = true,
+        Ace = "AddMoney.access", -- Ace Permission
         Command = "addmoney" -- /addmoney <id> <cash:bank> <amount> -- Adds money to cash or bank to the targeted player.
     }
 }
