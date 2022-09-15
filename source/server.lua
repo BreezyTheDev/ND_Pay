@@ -36,4 +36,23 @@ if Settings.Give.Toggle then
     end, false)
 end
 
+if Settings.AddMoney.Toggle then
+    RegisterCommand(Settings.AddMoney.Command, function(source, args, rawCommand)
+        local player = source
+        local target = tonumber(args[1])
+        local option = table.concat(args, " ", 2) -- cash or bank
+        local amount = tonumber(args[3])
+        if target and amount ~= nil then
+            if option == "bank" then
+                NDCore.Functions.AddMoney(amount, target, "bank")
+            elseif option == "cash" then
+                NDCore.Functions.AddMoney(amount, target, "cash")
+            end
+        else
+            -- Wrong syntax, it's /addmoney <id> <cash:bank> <amount>
+            TriggerClientEvent('chatMessage', player, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
+        end
+    end, false)
+end
+
 
