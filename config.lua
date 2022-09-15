@@ -13,7 +13,7 @@ Settings = {
     Give = {
         Toggle = true,
         Command = "give" -- /give <amount> -- Uses your cash balance to transfer funds to the nearest player.
-    }
+    },
     AddMoney = {
         Toggle = true,
         Ace = "AddMoney.access", -- Ace Permission
