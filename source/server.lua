@@ -51,7 +51,7 @@ if Settings.AddMoney.Toggle then
                 end
             else
                 -- Wrong syntax, it's /addmoney <id> <cash:bank> <amount>
-                TriggerClientEvent('chatMessage', src, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
+                TriggerClientEvent('chatMessage', player, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
             end
         else
             TriggerClientEvent('chatMessage', player, '^1ERROR: You need permission for this command!')
