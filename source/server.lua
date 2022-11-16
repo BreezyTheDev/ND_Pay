@@ -46,8 +46,10 @@ if Settings.AddMoney.Toggle then
             if target and amount ~= nil then
                 if option == "bank" then
                     NDCore.Functions.AddMoney(amount, target, "bank")
+                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..GetPlayerName(target).."'s account"
                 elseif option == "cash" then
                     NDCore.Functions.AddMoney(amount, target, "cash")
+                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..GetPlayerName(target).."'s account"
                 end
             else
                 -- Wrong syntax, it's /addmoney <id> <cash:bank> <amount>
