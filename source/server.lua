@@ -40,16 +40,17 @@ if Settings.AddMoney.Toggle then
     RegisterCommand(Settings.AddMoney.Command, function(source, args, rawCommand)
         local player = source
         local target = tonumber(args[1])
+        local tname = GetPlayerName(target)
         local option = table.concat(args, " ", 2) -- cash or bank
         local amount = tonumber(args[3])
         if IsPlayerAceAllowed(player, Settings.AddMoney.Ace) then
             if target and amount ~= nil then
                 if option == "bank" then
                     NDCore.Functions.AddMoney(amount, target, "bank")
-                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..GetPlayerName(target).."'s account"
+                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..tname.."'s account"
                 elseif option == "cash" then
                     NDCore.Functions.AddMoney(amount, target, "cash")
-                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..GetPlayerName(target).."'s account"
+                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..tname.."'s account"
                 end
             else
                 -- Wrong syntax, it's /addmoney <id> <cash:bank> <amount>
