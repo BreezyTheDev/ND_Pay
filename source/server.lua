@@ -14,7 +14,7 @@ if Settings.Pay.Toggle then
         local player = source
         local target = tonumber(args[1])
         local amount = tonumber(args[2])
-        if target and amount ~= nil then
+        if target ~= nil and amount ~= nil then
             NDCore.Functions.TransferBank(amount, player, target)
         else
            -- Wrong syntax, it's /pay <id> <amount>
@@ -44,7 +44,7 @@ if Settings.AddMoney.Toggle then
         local option = table.concat(args, " ", 2) -- cash or bank
         local amount = tonumber(args[3])
         if IsPlayerAceAllowed(player, Settings.AddMoney.Ace) then
-            if target and amount ~= nil then
+            if target ~= nil and amount ~= nil then
                 if option == "bank" then
                     NDCore.Functions.AddMoney(amount, target, "bank")
                     TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..tname.."'s account"
