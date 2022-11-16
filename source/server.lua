@@ -37,28 +37,38 @@ if Settings.Give.Toggle then
 end
 
 if Settings.AddMoney.Toggle then
-    RegisterCommand(Settings.AddMoney.Command, function(source, args, rawCommand)
+    RegisterCommand("addmoney", function(source, args, rawCommand)
         local player = source
         local target = tonumber(args[1])
-        local tname = GetPlayerName(target)
-        local option = table.concat(args, " ", 2) -- cash or bank
-        local amount = tonumber(args[3])
-        if IsPlayerAceAllowed(player, Settings.AddMoney.Ace) then
-            if target ~= nil and amount ~= nil then
-                if option == "bank" then
-                    NDCore.Functions.AddMoney(amount, target, "bank")
-                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..tname.."'s account"
-                elseif option == "cash" then
-                    NDCore.Functions.AddMoney(amount, target, "cash")
-                    TriggerClientEvent('chatMessage', player, "^1[ND-PAY] ^3You have successfully added $"..amount.." to "..tname.."'s account"
-                end
-            else
-                -- Wrong syntax, it's /addmoney <id> <cash:bank> <amount>
-                TriggerClientEvent('chatMessage', player, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
-            end
-        else
-            TriggerClientEvent('chatMessage', player, '^1ERROR: You need permission for this command!')
+        if not target then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
+            return
         end
+
+        local option = args[2]
+        if not option or (option ~= "bank" and option ~= "cash") then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
+            return
+        end
+
+        local amount = tonumber(args[3])
+        if not amount then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Wrong usage. /addmoney <id> <cash:bank> <amount>')
+            return
+        end
+
+        if amount == 0 then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Gotta be over 0. /addmoney <id> <cash:bank> <amount>')
+            return
+        end
+
+        if not IsPlayerAceAllowed(player, Settings.AddMoney.Ace) then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: You need permission for this command!')
+            return
+        end
+
+        NDCore.Functions.AddMoney(amount, target, option)
+        TriggerClientEvent('chat:addMessage', player, "^1[ND-PAY] ^3You have successfully added $" .. amount .. " to " .. GetPlayerName(target) .. "'s account")
     end, false)
 end
 
