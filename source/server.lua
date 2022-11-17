@@ -37,7 +37,7 @@ if Settings.Give.Toggle then
 end
 
 if Settings.AddMoney.Toggle then
-    RegisterCommand("addmoney", function(source, args, rawCommand)
+    RegisterCommand(Settings.AddMoney.Command, function(source, args, rawCommand)
         local player = source
         local target = tonumber(args[1])
         if not target then
