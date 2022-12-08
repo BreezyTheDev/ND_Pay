@@ -72,4 +72,39 @@ if Settings.AddMoney.Toggle then
     end, false)
 end
 
+if Settings.RemoveMoney.Toggle then
+    RegisterCommand(Settings.RemoveMoney.Command, function(source, args, rawCommand)
+        local player = source
+        local target = tonumber(args[1])
+        if not target then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Wrong usage. /removemoney <id> <cash:bank> <amount>')
+            return
+        end
+
+        local option = args[2]
+        if not option or (option ~= "bank" and option ~= "cash") then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Wrong usage. /removemoney <id> <cash:bank> <amount>')
+            return
+        end
+
+        local amount = tonumber(args[3])
+        if not amount then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Wrong usage. /removemoney <id> <cash:bank> <amount>')
+            return
+        end
+
+        if amount == 0 then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: Gotta be over 0. /removemoney <id> <cash:bank> <amount>')
+            return
+        end
+
+        if not IsPlayerAceAllowed(player, Settings.RemoveMoney.Ace) then
+            TriggerClientEvent('chat:addMessage', player, '^1ERROR: You need permission for this command!')
+            return
+        end
+
+        NDCore.Functions.DeductMoney(amount, target, option)
+        TriggerClientEvent('chat:addMessage', player, "^1[ND-PAY] ^3You have successfully removed $" .. amount .. " from " .. GetPlayerName(target) .. "'s account")
+    end, false)
+end
 
